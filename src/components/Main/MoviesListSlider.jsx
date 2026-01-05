@@ -22,7 +22,7 @@ export default function MoviesListSlider({ movies }) {
           },
         }}
         modules={[Autoplay]}
-        loop
+        loop={true}
         centeredSlides
         autoplay={{
           delay: 3000,
@@ -31,7 +31,7 @@ export default function MoviesListSlider({ movies }) {
         speed={1500}
       >
         {movies.map((img) => (
-          <SwiperSlide key={img}>
+          <SwiperSlide key={img.id}>
               <MovieCard img={img} />
           </SwiperSlide>
         ))}

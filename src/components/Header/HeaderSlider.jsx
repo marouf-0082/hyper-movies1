@@ -1,15 +1,29 @@
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
+import axios from "axios";
 
 import { Autoplay } from "swiper/modules";
 import MovieCard from "../Movie/MovieCard";
+import { useEffect, useState } from "react";
 
 export default function HeaderSlider({ setBg }) {
+  const [movies, setMovies] = useState([]);
 
-  
-  function getImage(number) {
-    return `/slider${number}.jpg`;
+  async function loadMovies() {
+    try {
+      const { data } = await axios.get(
+        "https://api.themoviedb.org/3/movie/popular?api_key=79dfd1eff0a74377d493be823af77d22"
+      );
+      setMovies(data.results);
+    } catch (e) {
+      alert("Error Loading Movies");
+      console.log(e.message);
+    }
   }
+
+  useEffect(() => {
+    loadMovies();
+  }, []);
 
   return (
     <div className="mt-8">
@@ -36,10 +50,18 @@ export default function HeaderSlider({ setBg }) {
         }}
         speed={1500}
       >
-        {[1, 2, 3, 4, 5].map((number) => (
-          <SwiperSlide key={number}>
-            <div onMouseOver={(e) => setBg(getImage(number))}>
-              <MovieCard img={getImage(number)} />
+        {movies.map((movie) => (
+          <SwiperSlide key={movie.id}>
+            <div
+              onMouseOver={() =>
+                setBg(`https://image.tmdb.org/t/p/w780/${movie.backdrop_path}`)
+              }
+            >
+              <MovieCard
+                img={`https://image.tmdb.org/t/p/w780/${movie.poster_path}`}
+                title={movie.title}
+                rate={movie.vote_average}
+              />
             </div>
           </SwiperSlide>
         ))}

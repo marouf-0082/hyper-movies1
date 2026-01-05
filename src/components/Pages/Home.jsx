@@ -1,4 +1,4 @@
-import MoviesListSlider from "./MoviesListSlider";
+import MoviesListSlider from "../Main/MoviesListSlider.jsx";
 
 const movies = [
   "/slider1.jpg",
@@ -13,19 +13,19 @@ const movies = [
   "/slider2.jpg",
 ];
 
-export default function MoviesList() {
+export default function Home() {
   return (
     <div className="container">
       <div className="pt-8">
         <div className="md:flex gap-8 items-center md:mb-4">
           <h2 className="text-slate-300 text-2xl">What's Popular</h2>
           <ul className="filterNav my-6 flex flex-col gap-4 md:flex md:flex-row md:gap-8 md:border-3 md:border-slate-700 py-2 px-4 rounded-4xl">
-            <li tabindex="0">
+            <li>
               Streaming
             </li>
-            <li tabindex="0">On TV</li>
-            <li tabindex="0">For Rent</li>
-            <li tabindex="0">In Theaters</li>
+            <li>On TV</li>
+            <li>For Rent</li>
+            <li>In Theaters</li>
           </ul>
         </div>
         <MoviesListSlider movies={movies} />
@@ -34,10 +34,10 @@ export default function MoviesList() {
         <div className="md:flex gap-8 items-center md:mb-4">
           <h2 className="text-slate-300 text-2xl">Free to Watch</h2>
           <ul className="filterNav my-6 flex flex-col gap-4 md:flex md:flex-row md:gap-8 md:border-3 md:border-slate-700 py-2 px-4 rounded-4xl">
-            <li tabindex="0">
+            <li>
               Movie
             </li>
-            <li tabindex="0">TV</li>
+            <li>TV</li>
           </ul>
         </div>
         <MoviesListSlider movies={movies} />
