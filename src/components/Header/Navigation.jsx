@@ -84,7 +84,7 @@ export default function Navigation() {
         <ul className="flex flex-col gap-4 tracking-tighter">
           {menuItems.map((item) => (
             <li key={item.path}>
-              <NavLink className="navLink" to={item.path} onClick={() => isOpenMenu(false)}>
+              <NavLink className="navLink" to={item.path} onClick={() => setIsOpenMenu(false)}>
                 {item.text}
               </NavLink>
             </li>
