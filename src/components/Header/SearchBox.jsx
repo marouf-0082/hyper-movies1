@@ -1,4 +1,24 @@
+import { useEffect, useState } from "react";
+import {fench} from "../../services/fench";
+
 export default function SearchBox() {
+  const [query , setQuery] = useState('');
+  const [searchResults, setSearchResults] = useState([]);
+
+  useEffect(() => {
+     const timeout = setTimeout(async() => {
+      if(query) {
+        const {data} = await fench('search/multi', {
+        params: {
+          query,
+        }
+      })
+      console.log(data);
+      setSearchResults(data.results);
+      }
+    }, 500);
+    return () => clearTimeout(timeout);
+  }, [query]);
   return (
     <section className="mt-12 text-slate-200">
       <div className="relative">
@@ -7,7 +27,9 @@ export default function SearchBox() {
           type="text"
           placeholder="Search for a movie, TV Show or celebrity that you are looking for"
           className="w-full bg-slate-600 text-2xl p-3 pr-13 border-4 border-slate-900 rounded-md outline-none placeholder:text-slate-500 placeholder:text-base"
-        />
+          value={query}
+          onChange={e => setQuery(e.target.value)}
+       />
         <svg
           xmlns="http://www.w3.org/2000/svg"
           width="28"

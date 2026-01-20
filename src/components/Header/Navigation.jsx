@@ -1,5 +1,6 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { Link, NavLink } from "react-router-dom";
+import { UserContext } from "../../context/userContext";
 
 const menuItems = [
   {
@@ -22,7 +23,7 @@ const menuItems = [
 
 export default function Navigation() {
   const [isOpenMenu, setIsOpenMenu] = useState(false);
-
+  const { user, logout } = useContext(UserContext);
   return (
     <>
       <nav className="flex items-baseline text-slate-300 bg-slate-900 p-4 md:container md:mx-auto md:bg-transparent md:py-4 md:px-6">
@@ -45,19 +46,31 @@ export default function Navigation() {
             ))}
           </ul>
         </div>
-        <div className="hidden md:block text-sm lg:text-base ml-auto uppercase ">
-          <ul className="flex gap-4">
-            <li>
-              <NavLink className="text-white tracking-wider" to="#">
-                Login
-              </NavLink>
-            </li>
-            <li>
-              <NavLink to="#" className="btn primary font-bold tracking-wider">
-                Sign up
-              </NavLink>
-            </li>
-          </ul>
+        <div className="hidden md:block text-sm lg:text-base ml-auto">
+          {user ? (
+            <div className="flex items-center justify-baseline gap-3">
+              <h2>{user.name}</h2>
+              <button className="btn secandry" onClick={logout}>
+                Logout
+              </button>
+            </div>
+          ) : (
+            <ul className="flex gap-4">
+              <li>
+                <NavLink className="text-white tracking-wider" to="/login">
+                  Login
+                </NavLink>
+              </li>
+              <li>
+                <NavLink
+                  to="#"
+                  className="btn primary font-bold tracking-wider"
+                >
+                  Sign up
+                </NavLink>
+              </li>
+            </ul>
+          )}
         </div>
         <div className="md:hidden ml-auto">
           <button onClick={() => setIsOpenMenu(!isOpenMenu)}>
@@ -84,7 +97,11 @@ export default function Navigation() {
         <ul className="flex flex-col gap-4 tracking-tighter">
           {menuItems.map((item) => (
             <li key={item.path}>
-              <NavLink className="navLink" to={item.path} onClick={() => setIsOpenMenu(false)}>
+              <NavLink
+                className="navLink"
+                to={item.path}
+                onClick={() => setIsOpenMenu(false)}
+              >
                 {item.text}
               </NavLink>
             </li>

@@ -1,4 +1,3 @@
-import MoviesListSlider from "../Main/MoviesListSlider.jsx";
 
 const movies = [
   "/slider1.jpg",
@@ -28,7 +27,7 @@ export default function Home() {
             <li>In Theaters</li>
           </ul>
         </div>
-        <MoviesListSlider movies={movies} />
+        {/* <MoviesListSlider movies={movies} /> */}
       </div>
       <div className="pt-8">
         <div className="md:flex gap-8 items-center md:mb-4">
@@ -40,7 +39,7 @@ export default function Home() {
             <li>TV</li>
           </ul>
         </div>
-        <MoviesListSlider movies={movies} />
+        {/* <MoviesListSlider movies={movies} /> */}
       </div>
     </div>
   );

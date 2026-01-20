@@ -1,13 +1,20 @@
 import { createBrowserRouter } from "react-router-dom";
 import App from "./App";
-import Home from "./components/Pages/Home";
-import Movies from "./components/Pages/Movies";
-import NotFound from "./components/Pages/404";
+import Home from "./Pages/Home";
+import Movies from "./Pages/Movies";
+import NotFound from "./Pages/404";
+import Movie from "./Pages/Movie";
+import Login from "./Pages/Login";
+import UserProvider from "./context/userContext";
 
 
 export const router = createBrowserRouter([
     {
-        element: <App/>,
+        element: (
+            <UserProvider>
+                <App/>
+            </UserProvider>
+        ),
         children: [
             {
                 path: "/",
@@ -16,6 +23,26 @@ export const router = createBrowserRouter([
             {
                 path: "/movies",
                 element: <Movies/>
+            },
+            {
+                path: "/tv",
+                element: <div>TV Shows Page</div>
+            },
+            {
+                path: "/people",
+                element: <div>people page</div>
+            },
+            {
+                path: "/more",
+                element: <div>more page</div>
+            },
+            {
+                path: "/movies/:id",
+                element: <Movie/>
+            },
+            {
+                path: "/login",
+                element: <Login/>
             },
             {
                 path: "*",

@@ -1,6 +1,5 @@
 export function SocialMediaSVG(props) {
   return (
-    <a>
       <svg
         xmlns="http://www.w3.org/2000/svg"
         width="16"
@@ -11,6 +10,5 @@ export function SocialMediaSVG(props) {
       >
         <path d={`${props.d}`} />
       </svg>
-    </a>
   );
 }

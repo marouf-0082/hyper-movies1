@@ -90,4 +90,8 @@ body {
   .primary:hover {
     @apply bg-green-500;
   }
+
+  .secandry {
+    @apply bg-transparent border-2 border-white text-white transition-all duration-350 ease-in-out ;
+  }
 }
