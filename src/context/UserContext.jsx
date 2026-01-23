@@ -3,7 +3,7 @@ import { createContext, useEffect } from "react";
 import { useState } from "react";
 import toast from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
-import { ConfirmDialog } from 'primereact/confirmdialog';
+import { fench } from "../services/fench";
 
 export const UserContext = createContext({user: null, session: null});
 
@@ -26,9 +26,7 @@ export default function UserProvider({ children }) {
   }
 
   async function getUserData() {
-    const {data} = await axios.get(
-      `${baseURL}/account?api_key=${apiKey}&session_id=${session}`
-    );
+    const {data} = await fench.get("/account");
     setUser(data);
   }
 
@@ -42,13 +40,11 @@ export default function UserProvider({ children }) {
   // Login function
   async function Login(username, password) {
     try {
-      const tokenResult = await axios.get(
-        `${baseURL}/authentication/token/new?api_key=${apiKey}`
-      );
+      const tokenResult = await fench.get("/authentication/token/new");
       console.log(tokenResult.data.request_token);
 
-      const authorize = await axios.post(
-        `${baseURL}/authentication/token/validate_with_login?api_key=${apiKey}`,
+      const authorize = await fench.post(
+        `/authentication/token/validate_with_login`,
         {
           username,
           password,
@@ -56,8 +52,8 @@ export default function UserProvider({ children }) {
         }
       );
 
-      const session = await axios.post(
-        `${baseURL}/authentication/session/new?api_key=${apiKey}`,
+      const session = await fench.post(
+        `/authentication/session/new`,
         {
           request_token: tokenResult.data.request_token,
         }

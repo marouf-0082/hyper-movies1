@@ -3,6 +3,7 @@ import { useParams } from "react-router-dom";
 import axios from "axios";
 import { UserContext } from "../context/userContext";
 import toast from "react-hot-toast";
+import { fench } from "../services/fench";
 
 const apiKey = "79dfd1eff0a74377d493be823af77d22";
 const baseURL = "https://api.themoviedb.org/3";
@@ -14,8 +15,8 @@ export default function Movie() {
   const [isInWatchList, setIsInWatchList] = useState(false);
 
   async function handleAddToWatchList() {
-    const result = await axios.post(
-      `${baseURL}/account/${user.id}/favorite?api_key=${apiKey}&session_id=${session}`,
+    const result = await fench.post(
+      `/account/${user.id}/favorite`,
       {
         media_type: "movie",
         media_id: movie.id,
@@ -29,8 +30,8 @@ export default function Movie() {
   }
 
   async function handleRemoveFromWatchList() {
-    const result = await axios.post(
-      `${baseURL}/account/${user.id}/favorite?api_key=${apiKey}&session_id=${session}`,
+    const result = await fench.post(
+      `/account/${user.id}/favorite`,
       {
         media_type: "movie",
         media_id: movie.id,
@@ -42,8 +43,8 @@ export default function Movie() {
   }
 
   async function loadMovie() {
-    const { data } = await axios.get(
-      `https://api.themoviedb.org/3/movie/${id}?api_key=79dfd1eff0a74377d493be823af77d22`
+    const { data } = await fench.get(
+      `/movie/${id}`
     );
     setMovie(data);
   }
