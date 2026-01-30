@@ -2,7 +2,7 @@ import { useState } from "react";
 import FollowUs from "./FollowUs";
 import HeaderSlider from "./HeaderSlider";
 import Navigation from "./Navigation";
-import SearchBox from "./SearchBox";
+import SearchBox from "./SearchBox/SearchBox";
 import cinema from "../../Assets/images/cinema.jpg";
 import { useLocation } from "react-router-dom";
 
@@ -20,10 +20,10 @@ export default function Header() {
       <Navigation />
       <div className="container">
         <SearchBox />
-          <div className={`${location.pathname !== '/' ? 'hidden' : 'block'}`}>
-            <FollowUs />
-            <HeaderSlider setBg={setBg} />
-          </div>
+        <div className={`${location.pathname !== "/" ? "hidden" : "block"}`}>
+          <FollowUs />
+          <HeaderSlider setBg={setBg} />
+        </div>
       </div>
     </header>
   );

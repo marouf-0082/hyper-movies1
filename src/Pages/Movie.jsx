@@ -1,6 +1,5 @@
 import { useContext, useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import axios from "axios";
 import { UserContext } from "../context/userContext";
 import toast from "react-hot-toast";
 import { fench } from "../services/fench";
