@@ -5,15 +5,12 @@ import Movies from "./Pages/Movies";
 import NotFound from "./Pages/404";
 import Movie from "./Pages/Movie";
 import Login from "./Pages/Login";
-import UserProvider from "./context/userContext";
 
 
 export const router = createBrowserRouter([
     {
         element: (
-            <UserProvider>
                 <App/>
-            </UserProvider>
         ),
         children: [
             {
