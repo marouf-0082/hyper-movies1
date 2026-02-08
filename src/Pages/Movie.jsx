@@ -3,6 +3,8 @@ import { useParams } from "react-router-dom";
 import { UserContext } from "../context/userContext";
 import toast from "react-hot-toast";
 import { fench } from "../services/fench";
+import { Helmet } from "react-helmet";
+import Title from "../components/Title";
 
 const apiKey = "79dfd1eff0a74377d493be823af77d22";
 const baseURL = "https://api.themoviedb.org/3";
@@ -53,6 +55,7 @@ export default function Movie() {
   }, [id]);
   return (
     <div>
+      <Title>{movie?.title}</Title>
       {movie ? (
         <div>
           <h1>{movie.title}</h1>
