@@ -1,10 +1,10 @@
 import { createContext, useEffect } from "react";
 import { useState } from "react";
 import toast from "react-hot-toast";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { fench } from "../services/fench";
 
-export const UserContext = createContext({ user: null, session: null });
+export const userContext = createContext({ user: null, session: null });
 
 const baseURL = "https://api.themoviedb.org/3";
 const apiKey = "79dfd1eff0a74377d493be823af77d22";
@@ -15,6 +15,7 @@ export default function UserProvider({ children }) {
   const [session, setSession] = useState(
     () => localStorage.getItem("session") || null
   );
+  const location = useLocation();
 
   // Logout function
   function logout() {
@@ -30,7 +31,12 @@ export default function UserProvider({ children }) {
 
   useEffect(() => {
     if (session) {
+      localStorage.setItem("session", session);
+      toast.success("Login successful!");
       getUserData();
+      if(location.pathname === '/login') {
+        navigate('/profile', { replace: true });
+      }
     }
   }, [session]);
 
@@ -54,19 +60,14 @@ export default function UserProvider({ children }) {
       });
 
       setSession(session.data.session_id);
-      localStorage.setItem("session", session.data.session_id);
-      toast.success("Login successful!");
-      navigate("/", {
-        replace: true,
-      });
     } catch {
       toast.error("Invalid username or password!");
     }
   }
 
   return (
-    <UserContext.Provider value={{ user, Login, session, logout }}>
+    <userContext.Provider value={{ user, Login, session, logout }}>
       {children}
-    </UserContext.Provider>
+    </userContext.Provider>
   );
 }

@@ -43,7 +43,6 @@ export default function HeaderSlider({ setBg }) {
           },
         }}
         modules={[Autoplay]}
-        loop
         autoplay={{
           delay: 2000,
           pauseOnMouseEnter: true,

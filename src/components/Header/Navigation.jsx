@@ -1,6 +1,6 @@
 import { useContext, useState } from "react";
 import { Link, NavLink } from "react-router-dom";
-import { UserContext } from "../../context/userContext";
+import { userContext } from "../../context/userContext";
 
 const menuItems = [
   {
@@ -23,7 +23,7 @@ const menuItems = [
 
 export default function Navigation() {
   const [isOpenMenu, setIsOpenMenu] = useState(false);
-  const { user, logout } = useContext(UserContext);
+  const { user, logout } = useContext(userContext);
   return (
     <>
       <nav className="flex items-baseline text-slate-300 bg-slate-900 p-4 md:container md:mx-auto md:bg-transparent md:py-4 md:px-6">
@@ -49,7 +49,9 @@ export default function Navigation() {
         <div className="hidden md:block text-sm lg:text-base ml-auto">
           {user ? (
             <div className="flex items-center justify-baseline gap-3">
-              <h2>{user.name}</h2>
+              <NavLink to='/profile'>
+                <h2>{user.name}</h2>
+              </NavLink>
               <button className="btn secandry" onClick={logout}>
                 Logout
               </button>

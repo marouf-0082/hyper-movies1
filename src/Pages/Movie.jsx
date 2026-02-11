@@ -1,6 +1,6 @@
 import { useContext, useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import { UserContext } from "../context/userContext";
+import { userContext } from "../context/userContext";
 import toast from "react-hot-toast";
 import { fench } from "../services/fench";
 import { Helmet } from "react-helmet";
@@ -12,7 +12,7 @@ const baseURL = "https://api.themoviedb.org/3";
 export default function Movie() {
   const [movie, setMovie] = useState(null);
   const { id } = useParams();
-  const { user, session } = useContext(UserContext);
+  const { user, session } = useContext(userContext);
   const [isInWatchList, setIsInWatchList] = useState(false);
 
   async function handleAddToWatchList() {
