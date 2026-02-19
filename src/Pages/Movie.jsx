@@ -1,6 +1,6 @@
 import { useContext, useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import { userContext } from "../context/userContext";
+import { userContext } from "../context/Usercontext";
 import toast from "react-hot-toast";
 import { fench } from "../services/fench";
 import { Helmet } from "react-helmet";
@@ -16,14 +16,11 @@ export default function Movie() {
   const [isInWatchList, setIsInWatchList] = useState(false);
 
   async function handleAddToWatchList() {
-    const result = await fench.post(
-      `/account/${user.id}/favorite`,
-      {
-        media_type: "movie",
-        media_id: movie.id,
-        favorite: true,
-      }
-    );
+    const result = await fench.post(`/account/${user.id}/favorite`, {
+      media_type: "movie",
+      media_id: movie.id,
+      favorite: true,
+    });
 
     toast.success(`${movie.title} Added to your favorites!`);
     setIsInWatchList(true);
@@ -31,22 +28,17 @@ export default function Movie() {
   }
 
   async function handleRemoveFromWatchList() {
-    const result = await fench.post(
-      `/account/${user.id}/favorite`,
-      {
-        media_type: "movie",
-        media_id: movie.id,
-        favorite: false,
-      }
-    );
+    const result = await fench.post(`/account/${user.id}/favorite`, {
+      media_type: "movie",
+      media_id: movie.id,
+      favorite: false,
+    });
     toast.success(`${movie.title} Remove from your favorites!`);
     setIsInWatchList(false);
   }
 
   async function loadMovie() {
-    const { data } = await fench.get(
-      `/movie/${id}`
-    );
+    const { data } = await fench.get(`/movie/${id}`);
     setMovie(data);
   }
 

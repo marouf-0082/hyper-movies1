@@ -1,6 +1,6 @@
 import { useContext, useState } from "react";
 import { Link, NavLink } from "react-router-dom";
-import { userContext } from "../../context/userContext";
+import { userContext } from "../../context/Usercontext";
 
 const menuItems = [
   {
@@ -49,7 +49,7 @@ export default function Navigation() {
         <div className="hidden md:block text-sm lg:text-base ml-auto">
           {user ? (
             <div className="flex items-center justify-baseline gap-3">
-              <NavLink to='/profile'>
+              <NavLink to="/profile">
                 <h2>{user.name}</h2>
               </NavLink>
               <button className="btn secandry" onClick={logout}>
