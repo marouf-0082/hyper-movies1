@@ -1,6 +1,6 @@
 import { useContext, useState } from "react";
 import { Link, NavLink } from "react-router-dom";
-import { userContext } from "../../context/Usercontext";
+import { userContext } from "../../context/UserContext";
 
 const menuItems = [
   {
