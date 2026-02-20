@@ -2,18 +2,18 @@ import { Outlet } from "react-router-dom";
 import Footer from "./components/Footer/Footer";
 import Header from "./components/Header/Header";
 import { Toaster } from "react-hot-toast";
-import UserProvider from "./context/UserContext";
+import UserProvider from "./context/userContext";
 
 function App() {
   return (
     <>
-      <Header />
       <UserProvider>
+      <Header />
         <main>
           <Outlet />
         </main>
-      </UserProvider>
       <Footer />
+      </UserProvider>
       <Toaster />
     </>
   );

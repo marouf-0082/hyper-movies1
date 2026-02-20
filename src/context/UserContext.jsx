@@ -31,11 +31,11 @@ export default function UserProvider({ children }) {
 
   useEffect(() => {
     if (session) {
-      localStorage.setItem("session", session);
-      toast.success("Login successful!");
-      getUserData();
-      if(location.pathname === '/login') {
-        navigate('/profile', { replace: true });
+        localStorage.setItem("session", session);
+        toast.success("Login successful!");
+        getUserData();
+      if (location.pathname === "/login") {
+        navigate("/profile", { replace: true });
       }
     }
   }, [session]);
@@ -44,8 +44,6 @@ export default function UserProvider({ children }) {
   async function Login(username, password) {
     try {
       const tokenResult = await fench.get("/authentication/token/new");
-      console.log(tokenResult.data.request_token);
-
       const authorize = await fench.post(
         `/authentication/token/validate_with_login`,
         {
