@@ -32,8 +32,8 @@ export default function UserProvider({ children }) {
   useEffect(() => {
     if (session) {
         localStorage.setItem("session", session);
-        toast.success("Login successful!");
         getUserData();
+        toast.success("Login successful!");
       if (location.pathname === "/login") {
         navigate("/profile", { replace: true });
       }

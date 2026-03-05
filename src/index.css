@@ -65,7 +65,7 @@ body {
 
 @layer components {
   .filterNav li{
-    @apply text-yellow-100 transition-all duration-300 ease-in-out cursor-pointer ;
+    @apply text-yellow-100 transition-all duration-300 ease-in-out  ;
   }
 
   .filterNav li:hover {

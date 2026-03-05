@@ -45,7 +45,7 @@ export default function HeaderSlider({ setBg }) {
         modules={[Autoplay]}
         autoplay={{
           delay: 2000,
-          pauseOnMouseEnter: true,
+          // pauseOnMouseEnter: true,
         }}
         speed={1500}
       >
