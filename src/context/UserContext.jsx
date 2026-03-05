@@ -1,13 +1,9 @@
-import { createContext, useEffect } from "react";
-import { useState } from "react";
+import { createContext, useEffect , useState} from "react";
 import toast from "react-hot-toast";
 import { useLocation, useNavigate } from "react-router-dom";
 import { fench } from "../services/fench";
 
-export const userContext = createContext({ user: null, session: null });
-
-const baseURL = "https://api.themoviedb.org/3";
-const apiKey = "79dfd1eff0a74377d493be823af77d22";
+export const UserContext = createContext({ user: null, session: null });
 
 export default function UserProvider({ children }) {
   const navigate = useNavigate();
@@ -64,8 +60,8 @@ export default function UserProvider({ children }) {
   }
 
   return (
-    <userContext.Provider value={{ user, Login, session, logout }}>
+    <UserContext.Provider value={{ user, Login, session, logout }}>
       {children}
-    </userContext.Provider>
+    </UserContext.Provider>
   );
 }

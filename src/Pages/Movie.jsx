@@ -1,6 +1,6 @@
 import { useContext, useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import { userContext } from "../context/userContext";
+import { userContext } from "../context/UserContext";
 import toast from "react-hot-toast";
 import { fench } from "../services/fench";
 import Title from "../components/Title";
