@@ -1,6 +1,6 @@
 import { useContext, useState } from "react";
 import { Link, NavLink } from "react-router-dom";
-import { userContext } from "../../context/UserContext";
+import { UserContext } from "../../context/UserContext";
 
 const menuItems = [
   {
@@ -23,7 +23,7 @@ const menuItems = [
 
 export default function Navigation() {
   const [isOpenMenu, setIsOpenMenu] = useState(false);
-  const { user, logout } = useContext(userContext);
+  const { user, logout } = useContext(UserContext);
 
   console.log(user?.name);
   return (

@@ -1,8 +1,8 @@
 import { useContext } from "react";
-import { userContext } from "../context/UserContext";
+import { UserContext } from "../context/UserContext";
 
 export default function Login() {
-  const { Login, session } = useContext(userContext);
+  const { Login, session } = useContext(UserContext);
 
   function handleLogin(e) {
     // Browser no reload the page

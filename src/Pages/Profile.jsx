@@ -1,10 +1,10 @@
 import { useContext } from "react";
-import { userContext } from "../context/UserContext";
+import { UserContext } from "../context/UserContext";
 import { Navigate } from "react-router-dom";
 import { imgUrl } from "../help/imgUrl";
 
 export default function Profile() {
-  const { user, session } = useContext(userContext);
+  const { user, session } = useContext(UserContext);
   console.log(user, session);
   return session ? (
     <div className="flex flex-col justify-center items-center gap-3 mt-10">
