@@ -6,6 +6,8 @@ import NotFound from "./Pages/404";
 import Movie from "./Pages/Movie";
 import Login from "./Pages/Login";
 import Profile from "./Pages/Profile";
+import Person from "./Pages/Person";
+import Tv from "./Pages/Tv";
 
 export const router = createBrowserRouter([
   {
@@ -22,12 +24,12 @@ export const router = createBrowserRouter([
         element: <Movies />,
       },
       {
-        path: "/tv",
-        element: <div>TV Shows Page</div>,
+        path: "/tv/:id",
+        element: <Tv/>,
       },
       {
-        path: "/people",
-        element: <div>people page</div>,
+        path: "/people/:id",
+        element: <Person/>,
       },
       {
         path: "/more",

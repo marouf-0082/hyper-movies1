@@ -7,7 +7,7 @@ import Person from "./items/Person";
 export default function SearchBox() {
   const [query, setQuery] = useState("");
   const [searchResults, setSearchResults] = useState([]);
-
+console.log(searchResults);
   useEffect(() => {
     const timeout = setTimeout(async () => {
       if (query) {

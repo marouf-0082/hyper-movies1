@@ -5,9 +5,6 @@ import toast from "react-hot-toast";
 import { fench } from "../services/fench";
 import Title from "../components/Title";
 
-const apiKey = "79dfd1eff0a74377d493be823af77d22";
-const baseURL = "https://api.themoviedb.org/3";
-
 export default function Movie() {
   const [movie, setMovie] = useState(null);
   const { id } = useParams();
