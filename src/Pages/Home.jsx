@@ -2,19 +2,6 @@ import Title from "../components/Title";
 import MoviesListSlider from "../components/Main/MoviesListSlider";
 import { useState } from "react";
 
-// const movies = [
-//   "/slider1.jpg",
-//   "/slider2.jpg",
-//   "/slider3.jpg",
-//   "/slider4.jpg",
-//   "/slider3.jpg",
-//   "/slider2.jpg",
-//   "/slider3.jpg",
-//   "/slider4.jpg",
-//   "/slider3.jpg",
-//   "/slider2.jpg",
-// ];
-
 export default function Home() {
   const [moviesActiveTab, setMoviesActiveTab] = useState("upcoming");
   const [tvActiveTab, setTvActiveTab] = useState("popular");
@@ -40,7 +27,7 @@ export default function Home() {
       <div className="pt-8">
         <div className="md:flex gap-8 items-center md:mb-4">
           <h2 className="text-slate-300 text-2xl">What's Popular</h2>
-          <ul className="filterNav my-6 flex flex-col gap-4 md:flex md:flex-row md:gap-8 md:border-3 md:border-slate-700 py-2 px-4 rounded-4xl [&>*]:cursor-pointer">
+          <ul className="filterNav my-6 flex flex-col gap-4 md:flex md:flex-row md:gap-8 md:border-2 md:border-slate-700 py-2 px-4 rounded-4xl [&>*]:cursor-pointer">
             <li
               onClick={() => handleChangeMoviesActiveTab("upcoming")}
               className={activeClass("upcoming")}
@@ -72,7 +59,7 @@ export default function Home() {
       <div className="pt-8">
         <div className="md:flex gap-8 items-center md:mb-4">
           <h2 className="text-slate-300 text-2xl">TV - Series</h2>
-          <ul className="filterNav my-6 flex flex-col gap-4 md:flex md:flex-row md:gap-8 md:border-3 md:border-slate-700 py-2 px-4 rounded-4xl \[&>*]:cursor-pointer">
+          <ul className="filterNav my-6 flex flex-col gap-4 md:flex md:flex-row md:gap-8 md:border-2 md:border-slate-700 py-2 px-4 rounded-4xl \[&>*]:cursor-pointer">
             <li
               onClick={() => handleChangeTvActiveTab("popular")}
               className={activeTvClass("popular")}

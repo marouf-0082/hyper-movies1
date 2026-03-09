@@ -45,7 +45,7 @@ console.log(searchResults);
           pattern="[A-Za-z] {1,9}"
           type="text"
           placeholder="Search for a movie, TV Show or celebrity that you are looking for"
-          className="w-full bg-slate-600 text-2xl p-3 pr-13 border-4 border-slate-900 rounded-md outline-none placeholder:text-slate-500 placeholder:text-base mb-1"
+          className="w-full bg-slate-600 text-2xl p-3 pr-13 border-3 border-slate-900 rounded-md outline-none placeholder:text-slate-500 placeholder:text-base mb-1"
           value={query}
           onChange={(e) => setQuery(e.target.value)}
         />

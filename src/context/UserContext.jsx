@@ -1,4 +1,4 @@
-import { createContext, useEffect , useState} from "react";
+import { createContext, useEffect, useState } from "react";
 import toast from "react-hot-toast";
 import { useLocation, useNavigate } from "react-router-dom";
 import { fench } from "../services/fench";
@@ -8,6 +8,7 @@ export const UserContext = createContext({ user: null, session: null });
 export default function UserProvider({ children }) {
   const navigate = useNavigate();
   const [user, setUser] = useState(null);
+  const [favoriteMovies, setFavoriteMovies] = useState([]);
   const [session, setSession] = useState(
     () => localStorage.getItem("session") || null
   );
@@ -22,14 +23,20 @@ export default function UserProvider({ children }) {
 
   async function getUserData() {
     const { data } = await fench.get("/account");
+    fetchFavoriteMovies(data.id);
     setUser(data);
+  }
+
+  async function fetchFavoriteMovies(id = user.id) {
+    const favResult = await fench.get(`/account/${id}/favorite/movies`);
+    setFavoriteMovies(favResult.data.results);
   }
 
   useEffect(() => {
     if (session) {
-        localStorage.setItem("session", session);
-        getUserData();
-        toast.success("Login successful!");
+      localStorage.setItem("session", session);
+      getUserData();
+      toast.success("Login successful!");
       if (location.pathname === "/login") {
         navigate("/profile", { replace: true });
       }
@@ -60,7 +67,9 @@ export default function UserProvider({ children }) {
   }
 
   return (
-    <UserContext.Provider value={{ user, Login, session, logout }}>
+    <UserContext.Provider
+      value={{ user, Login, session, logout, favoriteMovies, fetchFavoriteMovies}}
+    >
       {children}
     </UserContext.Provider>
   );

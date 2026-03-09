@@ -40,7 +40,7 @@ export default function MoviesListSlider({ type, activeTab}) {
       >
         {movies.map((movie) => (
           <SwiperSlide key={movie.id}>
-              <MovieCard movie={movie} imgSize="w342" type="movie"/>
+              <MovieCard movie={movie} imgSize="w342" type={type}/>
           </SwiperSlide>
         ))}
       </Swiper>
