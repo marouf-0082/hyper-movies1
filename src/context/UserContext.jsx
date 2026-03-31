@@ -36,7 +36,6 @@ export default function UserProvider({ children }) {
     if (session) {
       localStorage.setItem("session", session);
       getUserData();
-      toast.success("Login successful!");
       if (location.pathname === "/login") {
         navigate("/profile", { replace: true });
       }
@@ -60,6 +59,7 @@ export default function UserProvider({ children }) {
         request_token: tokenResult.data.request_token,
       });
 
+      toast.success("Login successful!");
       setSession(session.data.session_id);
     } catch {
       toast.error("Invalid username or password!");
@@ -68,7 +68,14 @@ export default function UserProvider({ children }) {
 
   return (
     <UserContext.Provider
-      value={{ user, Login, session, logout, favoriteMovies, fetchFavoriteMovies}}
+      value={{
+        user,
+        Login,
+        session,
+        logout,
+        favoriteMovies,
+        fetchFavoriteMovies,
+      }}
     >
       {children}
     </UserContext.Provider>
