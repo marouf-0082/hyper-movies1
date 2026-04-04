@@ -6,13 +6,15 @@ import toast from "react-hot-toast";
 import { fench } from "../services/fench";
 import Title from "../components/Title";
 import { imgUrl } from "../help/imgUrl";
+import { useMovieDB } from "../hooks/useMovieDB";
+import { ThreeDots } from "react-loader-spinner";
 
 export default function Movie() {
-  const [movie, setMovie] = useState(null);
-  const [isFavorite, setIsFavorite] = useState(false);
   const { id } = useParams();
-  const { user, session, favoriteMovies, fetchFavoriteMovies } =
-    useContext(UserContext);
+  const [movie, loading] = useMovieDB({endpoint: `/movie/${id}`});
+
+  const [isFavorite, setIsFavorite] = useState(false);
+  const { user, session, favoriteMovies, fetchFavoriteMovies } = useContext(UserContext);
 
   useEffect(() => {
     if (movie && favoriteMovies.length) {
@@ -49,19 +51,10 @@ export default function Movie() {
     setIsInWatchList(false);
   }
 
-  async function loadMovie() {
-    const { data } = await fench.get(`/movie/${id}`);
-    setMovie(data);
-  }
-
   async function ratingChanged(rate) {
      await fench.post(`movie/${movie.id}/rating`, {value: rate *2});
      toast.success('Your vote is submitted');
   }
-
-  useEffect(() => {
-    loadMovie();
-  }, [id]);
   return (
     <div className="-mt-[320px]">
       <Title>{movie?.title}</Title>
@@ -187,8 +180,21 @@ export default function Movie() {
             </div>
           </div>
         </div>
+      ) : loading ? (
+        <div className="flex justify-center items-center py-26">
+        <ThreeDots
+          height="80"
+          width="80"
+          radius="9"
+          color="#ffd700"
+          ariaLabel="three-dots-loading"
+          wrapperStyle={{ margin: "20px" }}
+          wrapperClass="custom-loader"
+          visible={loading && true}
+        />
+      </div>
       ) : (
-        <p>Loading...</p>
+        <div></div>
       )}
     </div>
   );

@@ -3,23 +3,31 @@ import { fench } from "../../../services/fench";
 import Movie from "./items/Movie";
 import TV from "./items/TV";
 import Person from "./items/Person";
+import { ThreeDots } from "react-loader-spinner";
 
 export default function SearchBox() {
   const [query, setQuery] = useState("");
   const [searchResults, setSearchResults] = useState([]);
-console.log(searchResults);
+  const [loading, setLoading] = useState(false);
+  console.log(searchResults);
   useEffect(() => {
+    setLoading(true);
     const timeout = setTimeout(async () => {
       if (query) {
-        const { data } = await fench("search/multi", {
-          params: {
-            query,
-          },
-        });
-        console.log(data);
-        setSearchResults(data.results);
+        try {
+          const { data } = await fench("search/multi", {
+            params: {
+              query,
+            },
+          });
+          setSearchResults(data.results);
+        } catch (e) {
+          setSearchResults([]);
+        }
+        setLoading(false);
       } else {
         setSearchResults([]);
+        setLoading(false);
       }
     }, 500);
     return () => clearTimeout(timeout);
@@ -50,17 +58,34 @@ console.log(searchResults);
           onChange={(e) => setQuery(e.target.value)}
         />
         <div
-          className={`p-2 flex flex-col gap-2 bg-slate-600/95 border-4 border-slate-900 absolute w-full z-10 left-0 overflow-y-auto rounded-md ${searchResults && query ? "block" : "hidden"} transition-all duration-300 max-h-[300px]`}
+          className={`p-2 flex flex-col gap-2 bg-slate-600/95 border-4 border-slate-900 absolute w-full z-10 left-0 overflow-y-auto rounded-md ${query ? "block" : "hidden"} transition-all duration-300 max-h-[300px]`}
         >
-            {searchResults.length === 0 ? (
-              <div className="text-center p-4">Not Found!</div>
-            ) : (
-              searchResults.map((item) => (
-                <div className="border-b-2 border-slate-700/40 pb-2" key={item.id} onClick={() => setQuery("")}>
-                  {showItem(item)}
-                </div>
-              ))
-            )}
+          {loading ? (
+            <div className="flex justify-center items-center">
+              <ThreeDots
+                height="80"
+                width="80"
+                radius="9"
+                color="#ffd700"
+                ariaLabel="three-dots-loading"
+                wrapperStyle={{ margin: "20px" }}
+                wrapperClass="custom-loader"
+                visible={true}
+              />
+            </div>
+          ) : searchResults.length === 0 ? (
+            <div className="text-center p-4">Not found!</div>
+          ) : (
+            searchResults.map((item) => (
+              <div
+                className="border-b-2 border-slate-700/40 pb-2"
+                key={item.id}
+                onClick={() => setQuery("")}
+              >
+                {showItem(item)}
+              </div>
+            ))
+          )}
         </div>
         <svg
           xmlns="http://www.w3.org/2000/svg"

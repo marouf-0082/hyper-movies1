@@ -1,33 +1,30 @@
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
-
+import { ThreeDots } from "react-loader-spinner";
 import { Autoplay } from "swiper/modules";
 import MovieCard from "../Movie/MovieCard";
-import { useEffect, useState } from "react";
-import { fench } from "../../services/fench";
+import { useMovieDB } from "../../hooks/useMovieDB";
 
 export default function HeaderSlider({ setBg }) {
-  const [movies, setMovies] = useState([]);
-
-  async function loadMovies() {
-    try {
-      const { data } = await fench.get(
-        "/movie/popular"
-      );
-      setMovies(data.results);
-    } catch (e) {
-      alert("Error Loading Movies");
-      console.log(e.message);
-    }
-  }
-
-  useEffect(() => {
-    loadMovies();
-  }, []);
+  const [data, loading] = useMovieDB({endpoint: "/movie/popular"});
 
   return (
     <div className="mt-8">
-      <Swiper
+     {loading ? (
+      <div className="flex justify-center items-center py-26">
+        <ThreeDots
+          height="80"
+          width="80"
+          radius="9"
+          color="#ffd700"
+          ariaLabel="three-dots-loading"
+          wrapperStyle={{ margin: "20px" }}
+          wrapperClass="custom-loader"
+          visible={loading && true}
+        />
+      </div>
+     ) : (
+       <Swiper
         breakpoints={{
           640: {
             slidesPerView: 2,
@@ -49,7 +46,7 @@ export default function HeaderSlider({ setBg }) {
         }}
         speed={1500}
       >
-        {movies.map((movie) => (
+        {data && data.results.map((movie) => (
           <SwiperSlide key={movie.id}>
             <div
               onMouseOver={() =>
@@ -63,6 +60,7 @@ export default function HeaderSlider({ setBg }) {
           </SwiperSlide>
         ))}
       </Swiper>
+     ) }
     </div>
   );
 }
