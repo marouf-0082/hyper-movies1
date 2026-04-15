@@ -23,6 +23,7 @@ export default function Home() {
   }
   return (
     <div className="container">
+      <Title>Home</Title>
       <div className="pt-8">
         <div className="md:flex gap-8 items-center md:mb-4">
           <h2 className="text-slate-300 text-2xl">What's Popular</h2>

@@ -9,6 +9,7 @@ export default function UserProvider({ children }) {
   const navigate = useNavigate();
   const [user, setUser] = useState(null);
   const [favoriteMovies, setFavoriteMovies] = useState([]);
+  const [favoriteTv, setFavoriteTv] = useState([]);
   const [session, setSession] = useState(
     () => localStorage.getItem("session") || null
   );
@@ -24,12 +25,18 @@ export default function UserProvider({ children }) {
   async function getUserData() {
     const { data } = await fench.get("/account");
     fetchFavoriteMovies(data.id);
+    fetchFavoriteTv(data.id);
     setUser(data);
   }
 
   async function fetchFavoriteMovies(id = user.id) {
     const favResult = await fench.get(`/account/${id}/favorite/movies`);
     setFavoriteMovies(favResult.data.results);
+  }
+
+  async function fetchFavoriteTv(id = user.id) {
+    const favResult = await fench.get(`/account/${id}/favorite/tv`);
+    setFavoriteTv(favResult.data.results);
   }
 
   useEffect(() => {
@@ -74,7 +81,9 @@ export default function UserProvider({ children }) {
         session,
         logout,
         favoriteMovies,
+        favoriteTv,
         fetchFavoriteMovies,
+        fetchFavoriteTv,
       }}
     >
       {children}
